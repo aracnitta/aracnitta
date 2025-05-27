@@ -6,25 +6,31 @@ on:
   workflow_dispatch:
   push:
     branches:
+    - main
     - master
 
 jobs:
   generate:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     
     steps:
-      - name: generate github-contribution-grid-snake.svg
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Generate github-contribution-grid-snake.svg
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: aracnitta
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-            dist/github-contribution-grid-snake-pink.svg?palette=pink
+            dist/github-contribution-grid-snake-pink.svg?color_snake=%23ff69b4&color_dots=%23ffb6c1,%23ff1493,%23e91e63,%23c2185b,%23880e4f
             
-      - name: push github-contribution-grid-snake.svg to the output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+      - name: Push github-contribution-grid-snake.svg to output branch
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
           build_dir: dist
