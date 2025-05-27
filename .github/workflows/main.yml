@@ -23,11 +23,11 @@ jobs:
       - name: Generate github-contribution-grid-snake.svg
         uses: Platane/snk/svg-only@v3
         with:
-          github_user_name: aracnitta
+          github_user_name: ${{ github.repository_owner }}
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-            dist/github-contribution-grid-snake-pink.svg?color_snake=%23ff69b4&color_dots=%23ffb6c1,%23ff1493,%23e91e63,%23c2185b,%23880e4f
+            dist/github-contribution-grid-snake-pink.svg?color_snake=%23ff69b4&color_dots=%23ffb6c1,%23ff1493,%23e91e63,%23c2185b,%23880e4f&color_empty=%23161b22&color_snake_dots=%23ff69b4
             
       - name: Push github-contribution-grid-snake.svg to output branch
         uses: crazy-max/ghaction-github-pages@v4
